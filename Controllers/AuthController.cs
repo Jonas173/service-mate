@@ -1,18 +1,18 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ServiceMate.API.Controller {
+namespace ServiceMate.API.Controllers {
     [ApiController]
-    [Route("api/")]
+    [Route("api")]
     public class AuthController: ControllerBase {
-        [Post("login")]
+        [HttpPost("login")]
         public IActionResult Login() {
-            // TODO
+            return Ok("Logged in"); // TODO
         }
 
-        [Get("logout")]
+        [HttpGet("logout")]
         public IActionResult Logout() {
-            // TODO
+            return Ok("Logged out"); // TODO
         }
     }
 }

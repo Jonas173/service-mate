@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    volumes:
+     - mysql_data:/var/lib/mysql
+    ports:
+      - "8081:3306"
+    env_file:
+      - ./.env
+  backend:
+    build: .
+    ports: 
+      - "80:80"
+    depends_on:
+      - mysql
+volumes:
+  mysql_data:
