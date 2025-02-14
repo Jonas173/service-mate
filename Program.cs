@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using ServiceMate.API.Data;
+using ServiceMate.Data;
+using ServiceMate.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ServiceMateConnectionString");
@@ -8,8 +9,13 @@ var connectionString = builder.Configuration.GetConnectionString("ServiceMateCon
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-builder.WebHost.UseUrls("http://+:8080");
+builder.WebHost.UseUrls();
 builder.Services.AddDbContext<ServiceDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddScoped<IScheduledMaintenanceRepository, SqlScheduledMaintenanceRepository>();
+builder.Services.AddScoped<IServiceRepository, SqlServiceRepository>();
+builder.Services.AddScoped<IUserRepository, SqlUserRepository>();
+builder.Services.AddScoped <IVehicleRepository>();
+
 
 var app = builder.Build();
 

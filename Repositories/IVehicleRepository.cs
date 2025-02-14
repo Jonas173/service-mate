@@ -1,6 +1,6 @@
 namespace ServiceMate.Repositories;
 
-public interface IServiceRepository
+public interface IVehicleRepository
 {
     
 }
