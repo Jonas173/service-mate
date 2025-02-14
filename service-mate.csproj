@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ServiceMate</RootNamespace>
+    <UserSecretsId>service-mate-secrets</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
