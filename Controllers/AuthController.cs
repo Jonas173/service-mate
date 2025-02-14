@@ -6,12 +6,12 @@ namespace ServiceMate.API.Controllers {
     [Route("api")]
     public class AuthController: ControllerBase {
         [HttpPost("login")]
-        public IActionResult Login() {
+        public async Task<IActionResult> Login() {
             return Ok("Logged in"); // TODO
         }
 
         [HttpGet("logout")]
-        public IActionResult Logout() {
+        public async Task<IActionResult> Logout() {
             return Ok("Logged out"); // TODO
         }
     }
