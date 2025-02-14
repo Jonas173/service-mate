@@ -5,7 +5,7 @@ using ServiceMate.Services;
 namespace ServiceMate.Controllers;
 
 [ApiController]
-[Microsoft.AspNetCore.Components.Route("api/users")]
+[Route("api/[controller]")]
 public class UserController : ControllerBase
 {
     private readonly UserService _service;
@@ -18,9 +18,9 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateUser([FromBody] AddUserRequestDto addUserRequestDto)
     {
-        var createdUser = await _service.createUser(addUserRequestDto);
+        var createdUser = _service.CreateUser(addUserRequestDto);
 
-        if (!createdUser) return BadRequest();
+        if (createdUser == null) return BadRequest();
 
         return Ok(createdUser);
     }
