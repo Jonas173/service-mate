@@ -5,4 +5,5 @@ namespace ServiceMate.Repositories;
 public interface IUserRepository
 {
    User CreateUser(User user);
+   User[] GetUsers();
 }

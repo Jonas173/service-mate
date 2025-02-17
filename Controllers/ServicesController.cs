@@ -1,16 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
-using ServiceMate.Data;
-using ServiceMate.Models;
+using ServiceMate.Services;
 
 namespace ServiceMate.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ServiceController: ControllerBase {
-    private readonly ServiceDbContext _dbContext;
+public class ServicesController: ControllerBase {
+    private readonly ServiceService _service;
 
-    public ServiceController(ServiceDbContext dbContext) {
-        this._dbContext = dbContext;
+    public ServicesController(ServiceService service) {
+        _service = service;
     }
 
     [HttpGet]

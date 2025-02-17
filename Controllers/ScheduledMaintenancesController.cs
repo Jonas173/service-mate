@@ -6,11 +6,11 @@ namespace ServiceMate.Controllers;
 
 [ApiController]
 [Route("api/scheduled-maintenances")]
-public class ScheduledMaintenanceController: ControllerBase
+public class ScheduledMaintenancesController: ControllerBase
 {
     private readonly ScheduledMaintenanceService _service;
 
-    public ScheduledMaintenanceController(ScheduledMaintenanceService service)
+    public ScheduledMaintenancesController(ScheduledMaintenanceService service)
     {
         _service = service;
     }

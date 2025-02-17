@@ -6,11 +6,11 @@ namespace ServiceMate.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserController : ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly UserService _service;
 
-    public UserController(UserService service)
+    public UsersController(UserService service)
     {
         _service = service;
     }
@@ -23,5 +23,13 @@ public class UserController : ControllerBase
         if (createdUser == null) return BadRequest();
 
         return Ok(createdUser);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var users = _service.GetAllUsers();
+        
+        return Ok(users);
     }
 }

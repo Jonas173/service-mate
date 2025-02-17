@@ -1,3 +1,4 @@
+using AutoMapper;
 using ServiceMate.Models.Domain;
 using ServiceMate.Models.DTO;
 using ServiceMate.Repositories;
@@ -7,12 +8,15 @@ namespace ServiceMate.Services;
 public class UserService
 {
     private readonly IUserRepository _repository;
-    public UserService(IUserRepository repository)
+    private readonly IMapper _mapper;
+    
+    public UserService(IUserRepository repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
-    public UserDto CreateUser(AddUserRequestDto userDto)
+    public UserDto? CreateUser(AddUserRequestDto userDto)
     {
         var newEntry = new User
         {
@@ -23,16 +27,25 @@ public class UserService
             LastName = userDto.LastName
         };
 
-        var newUser = _repository.CreateUser(newEntry);
-
+        User? newUser = null;
+        try
+        {
+            newUser = _repository.CreateUser(newEntry);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message); // TODO use logger
+        }
+        
         if (newUser == null) return null;
 
-        return new UserDto { 
-            Id = newUser.Id, 
-            Username = newUser.Username, 
-            Email = newUser.Email, 
-            FirstName = newUser.FirstName, 
-            LastName = newUser.LastName 
-        };
+        return _mapper.Map<UserDto>(newUser);
+    }
+
+    public UserDto[] GetAllUsers()
+    {
+        var users = _repository.GetUsers().ToList();
+
+        return _mapper.Map<UserDto[]>(users);
     }
 }

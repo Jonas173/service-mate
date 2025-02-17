@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ServiceMate.Data;
 using ServiceMate.Repositories;
+using ServiceMate.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ServiceMateConnectionString");
@@ -11,10 +12,12 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.WebHost.UseUrls();
 builder.Services.AddDbContext<ServiceDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<IScheduledMaintenanceRepository, SqlScheduledMaintenanceRepository>();
 builder.Services.AddScoped<IServiceRepository, SqlServiceRepository>();
 builder.Services.AddScoped<IUserRepository, SqlUserRepository>();
-builder.Services.AddScoped <IVehicleRepository>();
+builder.Services.AddScoped <IVehicleRepository, SqlVehicleRepository>();
+builder.Services.AddAutoMapper(typeof(Program));
 
 
 var app = builder.Build();

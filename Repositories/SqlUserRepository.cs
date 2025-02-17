@@ -19,4 +19,9 @@ public class SqlUserRepository : IUserRepository
 
         return entry.Entity;
     }
+
+    public User[] GetUsers()
+    {
+        return _dbContext.Users.ToArray();
+    }
 }
