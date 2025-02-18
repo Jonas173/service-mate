@@ -16,7 +16,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateUser([FromBody] AddUserRequestDto addUserRequestDto)
+    public IActionResult CreateUser([FromBody] AddUserRequestDto addUserRequestDto)
     {
         var createdUser = _service.CreateUser(addUserRequestDto);
 
@@ -26,7 +26,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllUsers()
+    public IActionResult GetAllUsers()
     {
         var users = _service.GetAllUsers();
         
