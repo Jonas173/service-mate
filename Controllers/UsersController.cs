@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using ServiceMate.Models.DTO;
 using ServiceMate.Services;
@@ -6,6 +8,7 @@ namespace ServiceMate.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class UsersController : ControllerBase
 {
     private readonly UserService _service;
@@ -22,7 +25,7 @@ public class UsersController : ControllerBase
 
         if (createdUser == null) return BadRequest();
 
-        return Ok(createdUser);
+        return Created();
     }
 
     [HttpGet]
